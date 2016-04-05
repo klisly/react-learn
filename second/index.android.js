@@ -18,7 +18,7 @@ var MainScreen = require('./MainScreen');
 var SubScreen = require('./SubScreen');
 
 var _navigator;
-var SPLASH_INTERVAL = 3000;
+var SPLASH_INTERVAL = 1000;
 BackAndroid.addEventListener('hardwareBackPress', function () {
     if (_navigator && _navigator.getCurrentRoutes().length > 1) {
         _navigator.pop();
