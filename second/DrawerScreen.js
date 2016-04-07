@@ -1,3 +1,4 @@
+// jscs:disable
 var React = require('react-native');
 var {
   AppRegistry,
@@ -82,12 +83,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width:WINDOW_WIDTH,
-    backgroundColor:"#301D30"
+    backgroundColor:"#00a2ed"
   },
   drawer_avatar: {
-    height: WINDOW_WIDTH * 1 / 6,
-    width:WINDOW_WIDTH * 1 / 6,
-    borderRadius: WINDOW_WIDTH * 1 / 6,
+    height: WINDOW_WIDTH * 1 / 4,
+    width:WINDOW_WIDTH * 1 / 4,
+    borderRadius: WINDOW_WIDTH * 1 / 8,
     marginBottom:WINDOW_WIDTH * 1 / 48,
     marginTop:WINDOW_WIDTH * 1 / 24
   },

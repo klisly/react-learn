@@ -70,7 +70,7 @@ class second extends Component {
                 </View>
             );
         }
-        
+
     }
 
     render() {
