@@ -7,13 +7,13 @@ var {
   View
 }  = React;
 
-class SubScreen extends Component {
+class ItemDetail extends Component {
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.splash}>
-          Welcome to Poetry!
+          {this.props.index}
         </Text>
 
       </View>
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
     margin: 10,
   }
 });
-module.exports =  SubScreen;
+module.exports =  ItemDetail;

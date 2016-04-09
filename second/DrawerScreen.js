@@ -6,6 +6,7 @@ var {
   StyleSheet,
   Text,
   Image,
+  BackAndroid,
   TouchableOpacity,
   Dimensions,
   View,
@@ -13,24 +14,30 @@ var {
 var OPTION_INDEX_TANGSHI = 0;
 var OPTION_INDEX_SONGCI= 1;
 var OPTION_INDEX_YUANQU= 2;
+var OPTION_INDEX_USERINFO= 3;
 var WINDOW_WIDTH = Dimensions.get('window').width;
 var WINDOW_HEIGHT = Dimensions.get('window').height;
 
 var DrawerScreen = React.createClass( {
-
   render() {
     return (
       <View style={styles.container}>
         <View
           style={styles.drawer_info_bg}>
-          <Image
-              style={styles.drawer_avatar}
-              source={require('./images/default_avatar.png')}
+          <TouchableOpacity
+            style={styles.drawer_info_bg}
+            activeOpacity = {1}
+            onPress={() => this.props.onHandleOption(OPTION_INDEX_USERINFO)}
             >
-          </Image>
-          <Text style={styles.drawer_nick_name}>
-            昵称
-          </Text>
+            <Image
+                style={styles.drawer_avatar}
+                source={require('./images/default_avatar.png')}
+                >
+            </Image>
+            <Text style={styles.drawer_nick_name}>
+              昵称
+            </Text>
+          </TouchableOpacity>
         </View>
         <TouchableOpacity
           activeOpacity = {0.8}

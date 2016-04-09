@@ -6,8 +6,6 @@ var {
     AppRegistry,
     Component,
     StyleSheet,
-    Navigator,
-    BackAndroid,
     Text,
     View
     }  = React;
@@ -15,17 +13,9 @@ var {
 var TimerMixin = require('react-timer-mixin');
 var SplashScreen = require('./SplashScreen');
 var MainScreen = require('./MainScreen');
-var SubScreen = require('./SubScreen');
 
-var _navigator;
 var SPLASH_INTERVAL = 1000;
-BackAndroid.addEventListener('hardwareBackPress', function () {
-    if (_navigator && _navigator.getCurrentRoutes().length > 1) {
-        _navigator.pop();
-        return true;
-    }
-    return false;
-});
+
 class second extends Component {
 
     constructor(props) {
@@ -52,41 +42,18 @@ class second extends Component {
         );
     }
 
-    renderScene(route, navigationOperations, onComponentRef) {
-        _navigator = navigationOperations;
-        if (route.name === 'home') {
-            return (
-                <View style={styles.container}>
-                    <MainScreen navigator={navigationOperations}/>
-                </View>
-            );
-        } else if (route.name === 'story') {
-            return (
-                <View style={styles.container}>
-                    <SubScreen
-                        style={{flex: 1}}
-                        navigator={navigationOperations}
-                        story={route.story}/>
-                </View>
-            );
-        }
-
-    }
-
     render() {
         if (this.state.splashed) {
-            var initialRoute = {name: 'home'};
             return (
-                <Navigator
-                    style={styles.container}
-                    initialRoute={initialRoute}
-                    configureScene={() => Navigator.SceneConfigs.FadeAndroid}
-                    renderScene={this.renderScene}
-                />
+              <View style={styles.container}>
+                  <MainScreen />
+              </View>
             );
         } else {
             return (
+              <View style={styles.container}>
                 <SplashScreen />
+              </View>
             );
         }
     }
