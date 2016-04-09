@@ -1,23 +1,15 @@
 var React = require('react-native');
 var {
-  AppRegistry,
-  Component,
   StyleSheet,
-  Button,
   Text,
   DrawerLayoutAndroid,
-  Navigator,
-  BackAndroid,
   View,
   Image,
-  ListView,
   Dimensions,
   TouchableOpacity,
-  TouchableHighlight,
 }  = React;
 
 var WINDOW_WIDTH = Dimensions.get('window').width;
-var WINDOW_HEIGHT = Dimensions.get('window').height;
 var tweens = require('./tweens');
 var OPTION_INDEX_NONE = -1;
 var OPTION_INDEX_TANGSHI = 0;
@@ -25,18 +17,10 @@ var OPTION_INDEX_SONGCI= 1;
 var OPTION_INDEX_YUANQU= 2;
 var OPTION_INDEX_USERINFO= 3;
 
-var GiftedListView = require('react-native-gifted-listview');
 var DrawerScreen = require('./DrawerScreen');
 var ItemDetail = require('./ItemDetail');
 var UserDetail = require('./UserDetail');
-var _navigator;
-BackAndroid.addEventListener('hardwareBackPress', function () {
-    if (_navigator && _navigator.getCurrentRoutes().length > 1) {
-        _navigator.pop();
-        return true;
-    }
-    return false;
-});
+
 var MainScreen = React.createClass({
 
   getInitialState: function() {
@@ -71,50 +55,24 @@ var MainScreen = React.createClass({
         title:title
       }
     );
-    this.refs.navigator.push({index:type});
     this.closeDrawer();
   },
   onClickMore: function() {
     this.drawer.openDrawer();
   },
-  renderScene:function(route, navigator) {
-    if (route.index === OPTION_INDEX_USERINFO) {
-      return (
-        <UserDetail
-          style={styles.container}
-          navigator={navigator} />
-      );
-    } else if (route.index === OPTION_INDEX_TANGSHI
-      || route.index === OPTION_INDEX_SONGCI
-      || route.index === OPTION_INDEX_YUANQU
-    ) {
-      return (
-        <ItemDetail
-          navigator={navigator}
-          index = {route.index} />
-      );
-    }
-  },
-  componentDidMount:function() {
-   var navigator = this.refs.navigator;
-   BackAndroid.addEventListener('hardwareBackPress', function() {
-       if (navigator && navigator.getCurrentRoutes().length > 1) {
-         navigator.pop();
-         return true;
-       }
-       return false;
-   });
- },
- componentWillUnmount:function() {
-   BackAndroid.removeEventListener('hardwareBackPress');
- },
   render: function() {
       var drawerView = <DrawerScreen onHandleOption={this.onHandleDrawerOption}/>;
-      var initialRoute = {index : OPTION_INDEX_TANGSHI};
+      var component;
+      if(this.state.index == OPTION_INDEX_USERINFO){
+          component = <UserDetail />
+      } else {
+          component = <ItemDetail index = {this.state.index}/>
+      }
 
+      var initialRoute = {index : OPTION_INDEX_TANGSHI};
       return (
          <DrawerLayoutAndroid
-            drawerWidth={WINDOW_WIDTH * 2 / 3}
+            drawerWidth={WINDOW_WIDTH * 4 / 5}
             drawerPosition={DrawerLayoutAndroid.positions.Left}
             ref={(drawer) => {this.drawer = drawer}}
             renderNavigationView={() => drawerView}
@@ -128,25 +86,14 @@ var MainScreen = React.createClass({
               <Text style={styles.toolbar_menu_title}>
                   {this.state.title}
               </Text>
-              <View style = {styles.toolbar_extra}/>
+              <View style = {styles.space_extra}/>
               <TouchableOpacity onPress={this.onClickMore}>
                 <Image
                   style={styles.toolbar_menu_action}
                   source={require('./images/ic_more_white.png')} />
               </TouchableOpacity>
             </View>
-            <Navigator
-                ref="navigator"
-                initialRoute={initialRoute}
-                configureScene={(route) => {
-                  if (route.sceneConfig) {
-                    return route.sceneConfig;
-                  }
-                  return Navigator.SceneConfigs.FloatFromRight;
-                }}
-                renderScene={this.renderScene}
-            />
-
+             {component}
         </DrawerLayoutAndroid>
       );
   }
@@ -195,7 +142,7 @@ const styles = StyleSheet.create({
     marginLeft:4,
     fontWeight:'400'
   },
-  toolbar_extra: {
+  space_extra: {
     flex:1
   },
   drawer: {

@@ -15,7 +15,7 @@ var WINDOW_HEIGHT = Dimensions.get('window').height;
 var ANIMATION_INTERVAL = 1000;
 
 class SplashScreen extends Component {
- 
+
  constructor(props: any) {
     super(props);
     this.state = {
@@ -43,7 +43,7 @@ class SplashScreen extends Component {
               height:WINDOW_HEIGHT,
               opacity: this.state.fadeAnim,
             }, styles.container]}
-          source={require('./images/splash.jpg')}
+          source={require('./images/splash.png')}
         />
     );
   }

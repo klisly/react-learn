@@ -17,7 +17,7 @@ var OPTION_INDEX_YUANQU= 2;
 var OPTION_INDEX_USERINFO= 3;
 var WINDOW_WIDTH = Dimensions.get('window').width;
 var WINDOW_HEIGHT = Dimensions.get('window').height;
-
+var drawer_width = WINDOW_WIDTH * 4 / 5;
 var DrawerScreen = React.createClass( {
   render() {
     return (
@@ -40,40 +40,46 @@ var DrawerScreen = React.createClass( {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
-          activeOpacity = {0.8}
-          style={[styles.drawer_item_btn,
-            {
-              backgroundColor:"#35223A"
-            }
-          ]}
+          activeOpacity = {1}
+          style={styles.drawer_item_btn}
           onPress={ () => this.props.onHandleOption(OPTION_INDEX_TANGSHI)}>
           <Text style={styles.drawer_item_text}>
             唐诗
           </Text>
+          <View style = {styles.space_extra}/>
+          <Image
+              style={styles.drawer_item_arrow}
+              source={require('./images/ic_right_arrow.png')}
+              >
+          </Image>
         </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity = {1}
+            style={styles.drawer_item_btn}
+            onPress={ () => this.props.onHandleOption(OPTION_INDEX_SONGCI)}>
+            <Text style={styles.drawer_item_text}>
+              宋词
+            </Text>
+            <View style = {styles.space_extra}/>
+            <Image
+                style={styles.drawer_item_arrow}
+                source={require('./images/ic_right_arrow.png')}
+                >
+            </Image>
+          </TouchableOpacity>
         <TouchableOpacity
-          activeOpacity = {0.8}
-          style={[styles.drawer_item_btn,
-            {
-              backgroundColor:"#472B42"
-            }
-          ]}
-          onPress={ () => this.props.onHandleOption(OPTION_INDEX_SONGCI)}>
-          <Text style={styles.drawer_item_text}>
-            宋词
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity = {0.8}
-          style={[styles.drawer_item_btn,
-            {
-              backgroundColor:"#6B404F"
-            }
-          ]}
+          activeOpacity = {1}
+          style={styles.drawer_item_btn}
           onPress={ () => this.props.onHandleOption(OPTION_INDEX_YUANQU)}>
           <Text style={styles.drawer_item_text}>
             元曲
           </Text>
+          <View style = {styles.space_extra}/>
+          <Image
+              style={styles.drawer_item_arrow}
+              source={require('./images/ic_right_arrow.png')}
+              >
+          </Image>
         </TouchableOpacity>
       </View>
     );
@@ -84,12 +90,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#90645D',
+    backgroundColor: '#FAFAFA',
   },
   drawer_info_bg:{
     justifyContent: 'center',
     alignItems: 'center',
-    width:WINDOW_WIDTH,
+    width:drawer_width,
     backgroundColor:"#00a2ed"
   },
   drawer_avatar: {
@@ -108,17 +114,34 @@ const styles = StyleSheet.create({
     marginBottom:WINDOW_WIDTH * 1 /24,
   },
   drawer_item_btn:{
-    paddingTop:WINDOW_WIDTH * 1 / 48,
-    paddingBottom:WINDOW_WIDTH * 1 / 48,
-    width:WINDOW_WIDTH,
-    backgroundColor:"#35223A"
+    flexDirection:"row",
+    alignItems: 'center',
+    justifyContent: 'center',
+    width:drawer_width,
+    height: 48,
+    paddingLeft:12,
+    paddingRight:24,
+    backgroundColor:"#FAFAFA"
   },
   drawer_item_text: {
     fontSize: 20,
-    flex:1,
     textAlign: 'center',
-    margin: 10,
-    color:"white"
-  }
+    color:"black",
+    marginTop:8,
+    marginBottom:8,
+    marginLeft:8,
+    marginRight:8
+  },
+  drawer_item_arrow: {
+    width:12,
+    height:12,
+    marginTop:8,
+    marginBottom:8,
+    marginLeft:8,
+    marginRight:8
+  },
+  space_extra: {
+    flex:1
+  },
 });
 module.exports =  DrawerScreen;
